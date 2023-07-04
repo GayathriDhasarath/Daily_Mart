@@ -1,0 +1,51 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<div class="row">
+    <div class="container-fluid">
+    <div class="col-9 float-right" style="padding-right:200px;">
+      <div class="card col-6 float-right" style="margin-top: 200px;">  
+              <div class="card-header">
+          <h3 class="card-title">Messages from Users</h3>
+
+          <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Subject</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+              <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.phone}}</td>
+                <td>{{i.subject}}</td>
+                <td>{{i.message}}</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+            </table>
+        </div></div></div></div>
+
+</div>
+   
+{% endblock %}

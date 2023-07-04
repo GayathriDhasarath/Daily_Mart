@@ -1,0 +1,136 @@
+{% extends 'userindex.html' %}
+{% block content %}
+<!-- check out section -->
+<div class="checkout-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-accordion-wrap">
+                    <div class="accordion" id="accordionExample">
+                      <div class="card single-accordion">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Billing Address
+                            </button>
+                          </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="billing-address-form">
+                              <form method="post" action="{% url 'checkoutdata' %}">
+                                {% csrf_token %}
+                                
+                                    <p><input type="text" placeholder="Address" name="address"></p>
+                                    <p><input type="text" placeholder="City" name="city"></p>
+                                    <p><input type="text" placeholder="State" name="state"></p>
+                                    <p><input type="text" placeholder="Country" name="country"></p>
+                                    <p><input type="number" placeholder="Pin code" name="zipcode"></p>
+                                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="card single-accordion">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Shipping Address
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="billing-address-form">
+                                <form action="index.html">
+                                    <p><input type="text" placeholder="Address" name="address2"></p>
+                                    <p><input type="text" placeholder="City" name="city2"></p>
+                                    <p><input type="text" placeholder="State" name="state2"></p>
+                                    <p><input type="text" placeholder="Country" name="country2"></p>
+                                    <p><input type="number" placeholder="Pin code" name="zipcode2"></p>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card single-accordion">
+                        <div class="card-header" id="headingThree">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Card Details
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="billing-address-form">
+                                <form>
+                                <p><input type="text" placeholder="Name on card" name="address"></p>
+                                <p><input type="text" placeholder="Account Number" name="city"></p>
+                                <p><input type="text" placeholder="Date of Expiry" name="state"></p>
+                                <p><input type="text" placeholder="CVV" name="country"></p>
+                            </form>  
+                        </div>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="order-details-wrap">
+               
+                    <table class="order-details">
+                        <thead>
+                            <th>Your order Details</th>   
+                          </thead>
+                        <tbody class="order-details-body">
+                            <tr>
+                                <td><b>Product</b></td>
+                                <td><b>Quantity</b></td>
+                                <td><b>Total</b></td>
+                            </tr>
+                            {% for i in data %}
+                            <tr>
+                                <td>{{i.productid.product_name}}</td>
+                                <td>{{i.quantity}}</td>
+                                <td>Rs. {{i.total}}</td>
+                            </tr>
+                           
+                            
+                        </tbody>
+                        <tbody class="checkout-details">
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td></td>
+                                <td>Rs.{{s.total__sum}}</td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Shipping</td>
+                                <td>$50</td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td>Total</td>
+                                <td>$240</td>
+                            </tr> -->
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                   
+                    <button type="submit" class="boxed-btn">Place Order</button>
+
+                  </form>
+                   
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
+<!-- end check out section -->
+
+{% endblock %}

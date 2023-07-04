@@ -1,0 +1,147 @@
+{% extends 'userindex.html' %}
+{% load static %}
+{% block content %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>See more Details</p>
+						<h1>Single Product</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+    {% for i in data %}
+	<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+                    <form method="post" action="{% url 'addtocart' id=i.id %}">
+                        {% csrf_token %}
+                    
+					<div class="single-product-img">
+						<img src="{{i.product_image.url}}" alt="">
+					</div>
+                
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+                        <div><input type=hidden id="price" value={{i.product_price}}></div>
+                        <form method="post" action="{% url 'addtocart' id=i.id %}">{% csrf_token %}
+						<h3>{{i.product_name}}</h3>
+						<p class="single-product-pricing"><span>Per Kg</span> RS. {{i.product_price}}</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
+						<div class="single-product-form">
+                            <input type="number" placeholder="1" min="1" id="quantity" name="quantity"></div>
+                        <div class="single-product-form">
+							<input type="text" placeholder="0" id="total" name="total" value="{{i.product_price}}">
+                        
+                        </div><br>
+							
+							<button type="submit" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button></a>
+						</form>
+							<p><strong>Categories: </strong>{{i.product_category}}</p>
+						</div>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->
+    {% endfor %}
+</div>
+	<!-- more products -->
+	<div class="more-products mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Related</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+		
+			
+			<div class="row">
+				{% for i in data2 %}
+				
+				<div class="col-lg-4 text-center">
+					
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'singleproduct' id=i.id %}"><img src="{{i.product_image.url}}" height=150px width=100px alt=""></a>
+						</div>
+						<h3>{{i.product_name}}</h3>
+						<p class="product-price"><span>Per Kg</span>Rs.{{i.product_price}}</p>
+						<a href="{% url 'cart' %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+		
+				{% endfor %}
+			</div>
+			
+		</div></div>
+	
+				<!-- <div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="{% static 'assets/img/products/product-img-2.jpg' %}" alt=""></a>
+						</div>
+						<h3>Berry</h3>
+						<p class="product-price"><span>Per Kg</span> 70$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
+						</div>
+						<h3>Lemon</h3>
+						<p class="product-price"><span>Per Kg</span> 35$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+			</div> 
+		</div>-->
+
+	<!-- end more products -->
+	
+
+	
+	<!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $('#quantity').on('change', function(){
+                var quantity=$('#quantity').val();
+                var price=$('#price').val();
+                // alert(quantity)
+                //alert(price)
+                var total=parseInt(quantity)*parseInt(price);
+                $('#total').val(total);
+            })
+        })
+    </script>
+	{% endblock %}
+	

@@ -1,0 +1,41 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="col-9 float-right" >
+<div class="card" style="margin-top:200px; padding-right: 200px;">
+    <div class="card-header">
+      <h3 class="card-title">Product Details</h3>
+    </div>
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>category</th>
+            <th>price</th>
+            <th>Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for i in data %}
+          <tr>
+            <td>{{i.product_name}}</td>
+            <td>{{i.product_type}}</td>
+            <td>{{i.product_desc}}</td>
+            <td> {{i.product_category}}</td>
+            <td>{{i.product_price}}</td>
+            <td><img src="{{i.product_image.url}}" height="80px" width="80px"></td>
+            <td><a href="{% url 'editdisplay' id=i.id %}"><button type="submit">Edit</button></a></button></a></td>
+            <td><a href="{% url 'product_delete' id=i.id %}"><button type="submit">Delete</button></a></button></a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+{% endblock %}
